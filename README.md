@@ -2,4 +2,5 @@
 This projet was realised by Li-Chi-Yane Etienne and Parisel Flora  
 All the implemented models and results are described in the notebook BE_Thermique.py  
 
-This project is also accessible on MyBinder : 
+This project is also accessible on MyBinder : https://mybinder.org/v2/gh/dm4bem-2023/project-groupe6/6cad70362e5e302e4af531299c1975d85f66d8f1?urlpath=lab%2Ftree%2FBE_Confort_thermique%2FBE_Thermique.ipynb
+
