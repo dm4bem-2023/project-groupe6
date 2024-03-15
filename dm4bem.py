@@ -646,3 +646,62 @@ def parse_epw(csvdata, coerce_year=None):
     data.index = idx
 
     return data, meta
+def round_time(dtmax):
+    """
+
+    Parameters
+    ----------
+    dtmax : float
+        Maximum time step for numerical stability of Euler explicit, dtmax / s.
+
+    Returns
+    -------
+    dt : float
+        Maximum time step rounded floor to:
+        1 s, 10 s,
+        60 s (1 min), 300 s (5 min), 600 s (10 min), 1800 s (30 min),
+        36000 s (1 h), 7200 s (2 h), 14400 s (4 h), 21600 s (6 h)
+
+    """
+    def round_floor(time):
+        return np.floor(dtmax / time) * time
+
+    if dtmax > 24 * 3600:
+        dt = round_floor(24 * 3600)     # round to 24 h
+
+    elif dtmax > 12 * 3600:
+        dt = round_floor(12 * 3600)     # round to 12 h
+
+    elif dtmax > 6 * 3600:
+        dt = round_floor(6 * 3600)      # round to 6 h
+
+    elif dtmax > 4 * 3600:
+        dt = round_floor(4 * 3600)      # round to 4 h
+
+    elif dtmax > 2 * 3600:
+        dt = round_floor(2 * 3600)      # round to 2h
+
+    elif dtmax > 3600:
+        dt = round_floor(3600)          # round to 1 h
+
+    elif dtmax > 30 * 60:
+        dt = round_floor(30 * 60)       # round to 30 min
+
+    elif dtmax > 10 * 60:
+        dt = round_floor(10 * 60)       # round to 10 min
+
+    elif dtmax > 5 * 60:
+        dt = round_floor(5 * 60)        # round to 5 min
+
+    elif dtmax >= 60:
+        dt = round_floor(60)            # round to 1 min
+
+    elif dtmax >= 10:
+        dt = round_floor(10)            # round to 10 s
+
+    elif dtmax >= 1:
+        dt = round_floor(1)             # round to 1 s
+    else:
+        dt = dtmax                      # if dt < 1 s, not rounded
+
+    return dt
