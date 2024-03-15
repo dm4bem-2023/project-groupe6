@@ -705,3 +705,32 @@ def round_time(dtmax):
         dt = dtmax                      # if dt < 1 s, not rounded
 
     return dt
+    
+def print_rounded_time(var_name, t):
+    """
+    Print the time in seconds, minutes or hours with 'var_name' in text.
+    e.g.: dt = 3600.0 s = 1 h
+
+    Parameters
+    ----------
+    var_name : str
+        Name of variable, e.g., 'dt'.
+    t : float or int
+        Time, t / s.
+
+    Returns
+    -------
+    None.
+
+    """
+    hours = t / 3600.
+    minutes = t / 60.
+    if hours > 1:
+        print(var_name + f' = {int(t)} s = {float(hours):.1f} h')
+    elif minutes > 1:
+        print(var_name + f' = {int(t)} s = {float(minutes):.1f} min')
+    elif t > 1:
+        print(var_name + f' = {int(t)} s')
+    else:
+        print(var_name + f' = {t:.3f} s')
+
